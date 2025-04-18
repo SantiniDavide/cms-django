@@ -3,10 +3,10 @@ services:
     name: django-cms
     env: python
     buildCommand: "./build.sh"
-    startCommand: "gunicorn MyCMS.wsgi:application"
+    startCommand: "gunicorn content_cms.wsgi:application"
     envVars:
       - key: DJANGO_SETTINGS_MODULE
-        value: nome_progetto.settings
+        value: content_cms.settings
       - key: SECRET_KEY
         generateValue: true
       - key: DEBUG

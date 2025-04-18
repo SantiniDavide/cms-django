@@ -3,7 +3,7 @@ services:
     name: django-cms
     env: python
     buildCommand: "./build.sh"
-    startCommand: "gunicorn ChatTest.wsgi:application"
+    startCommand: "gunicorn MyCMS.wsgi:application"
     envVars:
       - key: DJANGO_SETTINGS_MODULE
         value: nome_progetto.settings

@@ -1,0 +1,13 @@
+services:
+  - type: web
+    name: django-cms
+    env: python
+    buildCommand: "./build.sh"
+    startCommand: "gunicorn ChatTest.wsgi:application"
+    envVars:
+      - key: DJANGO_SETTINGS_MODULE
+        value: nome_progetto.settings
+      - key: SECRET_KEY
+        generateValue: true
+      - key: DEBUG
+        value: "False"

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <title>Lista Contenuti</title>
+</head>
+<body>
+    <h1>Contenuti disponibili</h1>
+    <ul>
+        {% for entry in entries %}
+            <li>
+                <a href="{% url 'public_entry_detail' entry.pk %}">
+                    {{ entry.title }}
+                </a>
+                <br>
+                <small>{{ entry.created_at|date:"d/m/Y" }}</small>
+            </li>
+        {% empty %}
+            <li>Nessun contenuto disponibile.</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>

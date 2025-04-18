@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ entry.title }}</title>
+</head>
+<body>
+    <a href="{% url 'public_entry_list' %}">← Torna alla lista</a>
+    <h1>{{ entry.title }}</h1>
+    <p><small>Pubblicato il {{ entry.created_at|date:"d/m/Y" }}</small></p>
+
+    <div>
+        {{ entry.body|safe }}
+    </div>
+
+    {% if entry.images.all %}
+        <h3>Immagini</h3>
+        <ul>
+            {% for image in entry.images.all %}
+                <li>
+                    <img src="{{ image.image.url }}" alt="{{ image.caption }}" width="300">
+                    {% if image.caption %}<p>{{ image.caption }}</p>{% endif %}
+                </li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+
+    {% if entry.videos.all %}
+        <h3>Video</h3>
+        <ul>
+            {% for video in entry.videos.all %}
+                <li>
+                    {% if video.type == 'file' %}
+                        <video width="400" controls>
+                            <source src="{{ video.video_file.url }}" type="video/mp4">
+                        </video>
+                    {% elif video.type == 'youtube' %}
+                        <iframe width="400" height="225" src="{{ video.youtube_url }}" frameborder="0" allowfullscreen></iframe>
+                    {% endif %}
+                    {% if video.caption %}<p>{{ video.caption }}</p>{% endif %}
+                </li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+</body>
+</html>
